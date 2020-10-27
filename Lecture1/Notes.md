@@ -1,5 +1,5 @@
 
-#Course logistics 
+# Course logistics 
 - Demos 
 - Lecture slides (for concepts only)
 - Reading assignments (to learn swift; 3 weeks only)
