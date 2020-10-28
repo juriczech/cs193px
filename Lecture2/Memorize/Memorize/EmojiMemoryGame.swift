@@ -9,5 +9,5 @@ import Foundation
 
 class EmojiMemoryGame {
     private(set) var game: MemoryGame<String>
-    
+
 }

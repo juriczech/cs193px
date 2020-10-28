@@ -30,3 +30,57 @@ Some of the types we will be seeing a lot:
 - classes
 - "don't care types" aka generics
 - functions
+
+### Structs and classes
+- Similarities
+    - stored vars
+    - computed vars
+    - constant lets
+    - functions
+    - initializers (special functions that are called when a struct or class is created)
+- Differences
+    - struct is stored by value / class is stored by reference
+    - struct is copied when passed or assigned / class is passed around via pointers
+    - copy on write (it's not copying straight away when you pass it around, only when you try to write to the struct) / automatically reference counted (counting the references and how many pointers are pointing to that class and when there are no pointers left, it gets removed)
+    - structs exploit functional programming / classes are object-oriented
+    - structs have no inheritence / classes have single inheritence
+    - "free" `init` initializes ALL vars / "free" `init` initializes NO vars (with classes, you almost always have your own `init`)
+    - with structs, mutability must be explicitly stated (`var`) / classes are always mutable
+    - structs are 'go to' data structure / classes are used in specific circumstances
+    
+![Structs and classes differences](./StructsClasses.png)    
+    
+### Generics
+- sometimes we just don't  care about the type. They are called type parameters.
+```
+struct Array<Element> {
+    func append(_ element: Element) {...}
+}
+```
+
+- This is how an array might be implemented. The appends function argument is `Element`. A don't care type. Array's implementation of append konw nothing about that argument and it does not care. Element is not any known struct or class or protocol, it's just a placeholder for a type.
+- When someone uses Array, that's when `Element` gets determined. (by `Array<Int>`)
+
+### Functions as types
+- Examples of functions as types
+```
+    var a: (Int, Int) -> Bool // Takes two `Int`s and returns `Bool`
+    var b: (Double) -> Void // Takes `Double` and returns nothing
+    var c: (Int) -> Int // Takes `Int` and returns `Int`
+    var d: () -> Void // Takes no parameters and returns nothing
+```
+
+- Example of passing function as a value
+``` 
+var operation: (Double) -> Double
+func square(operand: Double) -> Double {
+    return operand * operand
+}
+
+operation = square
+let result = operation(4) // result equals to 16
+```
+
+### Closures
+- common way to pass functions around is a way of "inlining" them. We call such an inlined function a "closure" and there's special language support for it. Will be covered in more depth later on.
+
